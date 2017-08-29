@@ -320,12 +320,12 @@ def go_google_protobuf(name = _GO_GOOGLE_PROTOBUF):
       visibility = ["//visibility:public"],
   )
 
-def go_proto_repositories(shared = 1):
+def go_proto_repositories(shared = 1, protobufCommit="8ee79997227bf9b34611aee7946ae64735e6fd93", xnetCommit="4971afdc2f162e82d185353533d3cf16188a9f4e", grpcCommit="b3a44ab17b608fdae6ad11d44e3ce3c9084a2c0e"):
   """Add this to your WORKSPACE to pull in all of the needed dependencies."""
   go_repository(
       name = "com_github_golang_protobuf",
       importpath = "github.com/golang/protobuf",
-      commit = "8ee79997227bf9b34611aee7946ae64735e6fd93",
+      commit = protobufCommit,
   )
   if shared:
     # if using multiple *_proto_library, allows caller to skip this.
@@ -339,11 +339,11 @@ def go_proto_repositories(shared = 1):
   # Needed for gRPC, only loaded by bazel if used
   go_repository(
       name = "org_golang_x_net",
-      commit = "4971afdc2f162e82d185353533d3cf16188a9f4e",
+      commit = xnetCommit,
       importpath = "golang.org/x/net",
   )
   go_repository(
       name = "org_golang_google_grpc",
-      tag = "v1.0.4",
+      commit = grpcCommit,
       importpath = "google.golang.org/grpc",
   )
